@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Delivery Details &amp; Status Actions – SmartCourier Driver">
+  <title>Delivery Details – SmartCourier Driver</title>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- SmartCourier Global Design System -->
+  <link href="../css/style.css" rel="stylesheet">
+  <!-- SmartCourier Dashboard Styles -->
+  <link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. TOP HEADER (.top-header)
+       ====================================================================== -->
+  <header class="top-header">
+    <div class="d-flex align-items-center">
+      <button class="sidebar-toggle-btn" aria-label="Toggle Navigation Sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+      <a href="dashboard.html" class="header-brand">
+        <div class="brand-icon">
+          <i class="bi bi-truck"></i>
+        </div>
+        <div class="brand-text">
+          Smart<span>Courier</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Search in Top Bar -->
+    <div class="header-search">
+      <div class="header-search-wrapper">
+        <i class="bi bi-search header-search-icon"></i>
+        <input 
+          type="text" 
+          class="header-search-input" 
+          placeholder="Search stops, tracking ID, customer..." 
+          aria-label="Search"
+        >
+        <span class="header-search-shortcut">Ctrl K</span>
+      </div>
+    </div>
+
+    <!-- Actions & User Profile Area on Right -->
+    <div class="header-actions">
+      <!-- Notification Dropdown -->
+      <div class="notification-container position-relative">
+        <button class="header-icon-btn notification-btn" aria-label="Notifications" title="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="header-badge-dot"></span>
+        </button>
+        <div class="custom-dropdown-panel" id="notificationDropdownMenu">
+          <div class="custom-dropdown-header">Active Parcel Updates</div>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-box-seam-fill text-primary"></i>
+            <div>
+              <div class="fw-semibold" style="font-size:0.75rem;">Parcel Inspection Ready</div>
+              <div class="text-muted" style="font-size:0.7rem;">Verify parcel condition before handover</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- User Profile Menu -->
+      <div class="user-profile-menu">
+        <button class="user-profile-btn" aria-label="User Profile">
+          <div class="user-avatar" style="background:#7C3AED; color:#fff;">AP</div>
+          <div class="user-info">
+            <div class="user-name">Amit Patil</div>
+            <div class="user-role">Fleet Courier</div>
+          </div>
+          <i class="bi bi-chevron-down user-dropdown-icon"></i>
+        </button>
+        <div class="custom-dropdown-panel" id="profileDropdownMenu">
+          <div class="custom-dropdown-header">Courier Account</div>
+          <a href="dashboard.html" class="custom-dropdown-item">
+            <i class="bi bi-grid-1x2"></i> Driver Dashboard
+          </a>
+          <a href="my-route.html" class="custom-dropdown-item">
+            <i class="bi bi-map"></i> My Route
+          </a>
+          <a href="../admin/dashboard.html" class="custom-dropdown-item">
+            <i class="bi bi-shield-lock text-primary"></i> Switch to Admin Portal
+          </a>
+          <div class="custom-dropdown-divider"></div>
+          <button type="button" class="custom-dropdown-item text-danger logout-trigger" data-action="logout">
+            <i class="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       2. PAGE LAYOUT WRAPPER (.page-layout)
+       ====================================================================== -->
+  <div class="page-layout">
+
+    <div class="sidebar-backdrop"></div>
+
+    <!-- LEFT NAVIGATION / SIDEBAR (.sidebar) -->
+    <aside class="sidebar">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-title">Courier Portal</li>
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link">
+            <i class="bi bi-grid-1x2"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="my-route.html" class="nav-link">
+            <i class="bi bi-map"></i>
+            <span>My Route</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link text-danger logout-trigger" data-action="logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         3. MAIN CONTENT AREA (.main-content)
+         ====================================================================== -->
+    <main class="main-content">
+      <div class="section-container">
+
+        <!-- 1. PAGE HEADER & BREADCRUMB -->
+        <div class="section-header">
+          <div>
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <a href="my-route.html" class="text-secondary text-decoration-none small"><i class="bi bi-arrow-left me-1"></i>My Route</a>
+              <span class="text-muted small">/</span>
+              <span class="text-dark small fw-semibold font-monospace" id="detailBreadcrumbId">SC-1001</span>
+            </div>
+            <h1 class="section-title">Delivery <span class="text-primary font-monospace" id="detailDeliveryId">#SC-1001</span></h1>
+            <p class="section-subtitle">Review recipient details and record delivery progress.</p>
+          </div>
+          <div class="section-actions d-flex align-items-center gap-2">
+            <a href="my-route.html" class="secondary-button">
+              <i class="bi bi-map"></i> View on Route
+            </a>
+            <a href="dashboard.html" class="secondary-button">
+              <i class="bi bi-grid-1x2"></i> Dashboard
+            </a>
+          </div>
+        </div>
+
+        <div class="row g-4">
+
+          <!-- LEFT COLUMN: RECIPIENT & PARCEL DETAILS -->
+          <div class="col-lg-8">
+
+            <!-- RECIPIENT CARD -->
+            <div class="content-card mb-4">
+              <div class="content-card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <h2 class="content-card-title mb-0">
+                  <i class="bi bi-person-circle me-2 text-primary"></i>Recipient &amp; Drop-off Information
+                </h2>
+                <div id="detailPriority">
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle fw-semibold">High</span>
+                </div>
+              </div>
+              <div class="content-card-body p-4">
+                <div class="row g-4">
+                  <div class="col-sm-6">
+                    <div class="text-muted small" style="font-size:0.75rem;">CUSTOMER NAME</div>
+                    <div class="fw-bold text-dark fs-6" id="detailCustomer">Rahul Sharma</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="text-muted small" style="font-size:0.75rem;">CONTACT PHONE</div>
+                    <div class="fw-semibold text-dark">
+                      <a href="tel:+919876543210" class="text-decoration-none text-primary" id="detailPhone">
+                        <i class="bi bi-telephone-outbound me-1"></i>+91 98765 43210
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="text-muted small" style="font-size:0.75rem;">DELIVERY ADDRESS</div>
+                    <div class="fw-medium text-dark mt-1">
+                      <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                      <span id="detailAddress">Flat 402, MG Road, Camp</span>
+                    </div>
+                    <div class="text-secondary small mt-1 ms-4" id="detailCityZip">Pune – 411001</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PACKAGE & VEHICLE SPECIFICATIONS CARD -->
+            <div class="content-card mb-4">
+              <div class="content-card-header">
+                <h2 class="content-card-title">
+                  <i class="bi bi-box-seam me-2 text-primary"></i>Package Specifications
+                </h2>
+              </div>
+              <div class="content-card-body p-4">
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <div class="text-muted small" style="font-size:0.75rem;">PACKAGE CONTENT</div>
+                    <div class="fw-semibold text-dark" id="detailPackage">Electronics (ThinkPad Laptop)</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="text-muted small" style="font-size:0.75rem;">WEIGHT</div>
+                    <div class="fw-semibold text-dark font-monospace" id="detailWeight">2.4 kg</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="text-muted small" style="font-size:0.75rem;">ASSIGNED DRIVER</div>
+                    <div class="fw-semibold text-dark" id="detailDriver">Amit Patil</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="text-muted small" style="font-size:0.75rem;">DISPATCH SCHEDULE</div>
+                    <div class="fw-semibold text-dark" id="detailDate">08 Oct 2026</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 1. STATUS TIMELINE -->
+            <div class="content-card mb-4">
+              <div class="content-card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <h2 class="content-card-title mb-0">
+                  <i class="bi bi-signpost-2 me-2 text-primary"></i>Delivery Status Timeline
+                </h2>
+                <span class="badge bg-light text-muted border" style="font-size:0.68rem;">Live Milestones</span>
+              </div>
+              <div class="content-card-body p-4" id="detailTimelineContainer">
+                <!-- Dynamically rendered stepper via driver.js -->
+              </div>
+            </div>
+
+            <!-- 2. DRIVER INFORMATION -->
+            <div class="content-card mb-4">
+              <div class="content-card-header">
+                <h2 class="content-card-title">
+                  <i class="bi bi-person-badge me-2 text-primary"></i>Driver Information
+                </h2>
+              </div>
+              <div class="content-card-body p-4" id="detailDriverCard">
+                <!-- Dynamically rendered driver details via driver.js -->
+              </div>
+            </div>
+
+            <!-- 3. DELIVERY NOTES -->
+            <div class="content-card mb-4">
+              <div class="content-card-header">
+                <h2 class="content-card-title">
+                  <i class="bi bi-chat-left-text me-2 text-primary"></i>Delivery Notes &amp; Special Instructions
+                </h2>
+              </div>
+              <div class="content-card-body p-4">
+                <div class="p-3 bg-light rounded border border-start-4 border-start-primary">
+                  <p class="mb-0 text-dark small" id="detailNotes">
+                    Fragile electronic parcel. Security verification code required at doorstep.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. ACTIVITY LOG -->
+            <div class="content-card">
+              <div class="content-card-header">
+                <h2 class="content-card-title">
+                  <i class="bi bi-clock-history me-2 text-primary"></i>Dispatch Activity Log
+                </h2>
+              </div>
+              <div class="content-card-body p-4" id="detailActivityLog">
+                <!-- Dynamically rendered activity timeline via driver.js -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: STATUS ACTIONS & CURRENT STATUS -->
+          <div class="col-lg-4">
+
+            <!-- CURRENT STATUS CARD -->
+            <div class="content-card mb-4">
+              <div class="content-card-header">
+                <h2 class="content-card-title">
+                  <i class="bi bi-clock-history me-2 text-primary"></i>Current Status
+                </h2>
+              </div>
+              <div class="content-card-body p-4 text-center">
+                <div class="mb-3" id="detailStatus">
+                  <span class="status-badge status-badge-primary fs-6 py-2 px-3">
+                    <i class="bi bi-truck me-1"></i>In Transit
+                  </span>
+                </div>
+                <p class="text-muted small mb-0">
+                  Follow official status sequence: <strong>Pending &rarr; Assigned &rarr; In Transit &rarr; Delivered / Failed</strong>.
+                </p>
+              </div>
+            </div>
+
+            <!-- STATUS ACTIONS CARD -->
+            <div class="content-card mb-4">
+              <div class="content-card-header">
+                <h2 class="content-card-title">
+                  <i class="bi bi-lightning-charge me-2 text-primary"></i>Status Actions
+                </h2>
+              </div>
+              <div class="content-card-body p-4">
+                <div class="d-grid gap-2">
+
+                  <!-- Start Delivery (Assign -> In Transit) -->
+                  <button type="button" class="btn btn-outline-primary text-start p-3 d-flex align-items-center justify-content-between" id="btnActionStart" style="border-radius: var(--radius-md);">
+                    <div>
+                      <div class="fw-semibold"><i class="bi bi-play-circle me-2"></i>Start Delivery</div>
+                      <div class="small text-muted" style="font-size:0.75rem;">Begin trip to this stop</div>
+                    </div>
+                    <i class="bi bi-chevron-right text-muted"></i>
+                  </button>
+
+                  <!-- Mark In Transit -->
+                  <button type="button" class="btn btn-outline-info text-start p-3 d-flex align-items-center justify-content-between" id="btnActionInTransit" style="border-radius: var(--radius-md);">
+                    <div>
+                      <div class="fw-semibold text-dark"><i class="bi bi-truck me-2 text-info"></i>Mark In Transit</div>
+                      <div class="small text-muted" style="font-size:0.75rem;">Parcel is currently on vehicle</div>
+                    </div>
+                    <i class="bi bi-chevron-right text-muted"></i>
+                  </button>
+
+                  <!-- Mark Delivered -->
+                  <button type="button" class="btn btn-success text-start p-3 d-flex align-items-center justify-content-between text-white" id="btnActionDelivered" style="border-radius: var(--radius-md);">
+                    <div>
+                      <div class="fw-bold"><i class="bi bi-check2-circle me-2"></i>Mark Delivered</div>
+                      <div class="small text-white-50" style="font-size:0.75rem;">Handover successfully completed</div>
+                    </div>
+                    <i class="bi bi-chevron-right text-white"></i>
+                  </button>
+
+                  <!-- Mark Failed -->
+                  <button type="button" class="btn btn-outline-danger text-start p-3 d-flex align-items-center justify-content-between" id="btnActionFailed" style="border-radius: var(--radius-md);">
+                    <div>
+                      <div class="fw-semibold"><i class="bi bi-x-circle me-2"></i>Mark Failed</div>
+                      <div class="small text-muted" style="font-size:0.75rem;">Customer absent / door locked</div>
+                    </div>
+                    <i class="bi bi-chevron-right text-muted"></i>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- QUICK CALL RECIPIENT CARD -->
+            <div class="content-card bg-light">
+              <div class="content-card-body p-3 text-center">
+                <div class="small text-muted mb-2">Need to contact the customer?</div>
+                <a href="tel:+919876543210" class="primary-button w-100 justify-content-center">
+                  <i class="bi bi-telephone-fill"></i> Call Customer Directly
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ======================================================================
+       MODAL: STATUS UPDATE CONFIRMATION MODAL
+       ====================================================================== -->
+  <div class="modal fade" id="driverStatusConfirmModal" tabindex="-1" aria-labelledby="driverStatusConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+      <div class="modal-content border-0 shadow-lg" style="border-radius: var(--radius-lg);">
+        <div class="modal-header border-bottom py-3 px-4">
+          <h5 class="modal-title fw-bold text-dark fs-6" id="driverStatusConfirmModalLabel">
+            <i class="bi bi-shield-check me-2 text-primary"></i>Confirm Status Change
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="text-center mb-3">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary p-3 mb-2" style="width: 52px; height: 52px; font-size: 1.4rem;">
+              <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <h6 class="fw-semibold text-dark mb-1">Update Delivery Record</h6>
+            <div class="badge bg-purple text-white px-2 py-1" style="background:#7C3AED;" id="confirmModalTargetStatus">Delivered</div>
+          </div>
+          
+          <div class="small text-secondary mb-3 text-center" id="confirmModalMessage">
+            Are you sure you want to update this status?
+          </div>
+
+          <!-- Reason select for Failed deliveries -->
+          <div class="mb-3" id="failureReasonGroup" style="display: none;">
+            <label for="failureReasonSelect" class="form-label small fw-semibold text-dark">Failure Reason <span class="text-danger">*</span></label>
+            <select class="form-select form-select-sm" id="failureReasonSelect">
+              <option value="Customer Unavailable" selected>Customer Unavailable / Door Locked</option>
+              <option value="Incorrect Address">Incorrect Address / Landmark Missing</option>
+              <option value="Customer Refused Parcel">Customer Refused / Cancelled on Arrival</option>
+              <option value="Security Access Denied">Gated Community / Security Access Denied</option>
+              <option value="Payment Issue (COD)">Cash on Delivery Issue</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer border-top py-2 px-4 bg-light d-flex justify-content-end gap-2">
+          <button type="button" class="secondary-button btn-sm-custom" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="primary-button btn-sm-custom" id="btnConfirmStatusChange">
+            <i class="bi bi-check-lg"></i> Confirm Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JavaScript Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SmartCourier Configuration & API Service Layer -->
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <!-- SmartCourier Global Layout JavaScript -->
+  <script src="../js/main.js"></script>
+  <!-- SmartCourier Driver Experience JavaScript -->
+  <script src="../js/driver.js"></script>
+</body>
+</html>

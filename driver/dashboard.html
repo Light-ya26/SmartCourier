@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Driver Dashboard – SmartCourier Fleet & Delivery Management">
+  <title>Driver Dashboard – SmartCourier</title>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- SmartCourier Global Design System -->
+  <link href="../css/style.css" rel="stylesheet">
+  <!-- SmartCourier Dashboard Styles -->
+  <link href="../css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. TOP HEADER (.top-header)
+       ====================================================================== -->
+  <header class="top-header">
+    <div class="d-flex align-items-center">
+      <button class="sidebar-toggle-btn" aria-label="Toggle Navigation Sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+      <a href="dashboard.html" class="header-brand">
+        <div class="brand-icon">
+          <i class="bi bi-truck"></i>
+        </div>
+        <div class="brand-text">
+          Smart<span>Courier</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Search in Top Bar -->
+    <div class="header-search">
+      <div class="header-search-wrapper">
+        <i class="bi bi-search header-search-icon"></i>
+        <input 
+          type="text" 
+          class="header-search-input" 
+          placeholder="Search stops, tracking ID, customer..." 
+          aria-label="Search"
+        >
+        <span class="header-search-shortcut">Ctrl K</span>
+      </div>
+    </div>
+
+    <!-- Actions & User Profile Area on Right -->
+    <div class="header-actions">
+      <!-- Notification Dropdown -->
+      <div class="notification-container position-relative">
+        <button class="header-icon-btn notification-btn" aria-label="Notifications" title="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="header-badge-dot"></span>
+        </button>
+        <div class="custom-dropdown-panel" id="notificationDropdownMenu">
+          <div class="custom-dropdown-header">Dispatch & Route Alerts</div>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-geo-alt-fill text-primary"></i>
+            <div>
+              <div class="fw-semibold" style="font-size:0.75rem;">New Route #RT-801 Dispatched</div>
+              <div class="text-muted" style="font-size:0.7rem;">6 stops assigned for Pune Central</div>
+            </div>
+          </a>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-exclamation-circle text-danger"></i>
+            <div>
+              <div class="fw-semibold" style="font-size:0.75rem;">High Priority: SC-1001</div>
+              <div class="text-muted" style="font-size:0.7rem;">Customer requested delivery before 12:30 PM</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- User Profile Menu -->
+      <div class="user-profile-menu">
+        <button class="user-profile-btn" aria-label="User Profile">
+          <div class="user-avatar" style="background:#7C3AED; color:#fff;">AP</div>
+          <div class="user-info">
+            <div class="user-name">Amit Patil</div>
+            <div class="user-role">Fleet Courier</div>
+          </div>
+          <i class="bi bi-chevron-down user-dropdown-icon"></i>
+        </button>
+        <div class="custom-dropdown-panel" id="profileDropdownMenu">
+          <div class="custom-dropdown-header">Courier Account</div>
+          <a href="my-route.html" class="custom-dropdown-item">
+            <i class="bi bi-signpost-2"></i> My Active Route
+          </a>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-person"></i> Courier Profile
+          </a>
+          <a href="../admin/dashboard.html" class="custom-dropdown-item">
+            <i class="bi bi-shield-lock text-primary"></i> Switch to Admin Portal
+          </a>
+          <div class="custom-dropdown-divider"></div>
+          <button type="button" class="custom-dropdown-item text-danger logout-trigger" data-action="logout">
+            <i class="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       2. PAGE LAYOUT WRAPPER (.page-layout)
+       ====================================================================== -->
+  <div class="page-layout">
+
+    <div class="sidebar-backdrop"></div>
+
+    <!-- LEFT NAVIGATION / SIDEBAR (.sidebar) -->
+    <aside class="sidebar">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-title">Courier Portal</li>
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link active">
+            <i class="bi bi-grid-1x2"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="my-route.html" class="nav-link">
+            <i class="bi bi-map"></i>
+            <span>My Route</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link text-danger logout-trigger" data-action="logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         3. MAIN CONTENT AREA (.main-content)
+         ====================================================================== -->
+    <main class="main-content">
+      <div class="section-container">
+
+        <!-- 1. PAGE HEADER -->
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">Good morning, Driver 👋</h1>
+            <p class="section-subtitle">Here's your operational overview and today's delivery schedule.</p>
+          </div>
+          <div class="section-actions">
+            <a href="my-route.html" class="primary-button" id="btnViewMyRoute">
+              <i class="bi bi-map-fill"></i> View My Route
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. FOUR SUMMARY STATISTICS CARDS -->
+        <section class="stats-grid-row mb-4" aria-label="Driver Delivery Statistics">
+
+          <!-- Card 1: Today's Deliveries -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-primary" aria-hidden="true">
+              <i class="bi bi-box-seam-fill"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">TODAY'S DELIVERIES</div>
+              <div class="stat-value" id="statDriverTotal">--</div>
+              <div class="stat-supporting-text">Total assigned stops</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Pending -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-warning" aria-hidden="true">
+              <i class="bi bi-clock-history"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">PENDING</div>
+              <div class="stat-value" id="statDriverPending">--</div>
+              <div class="stat-supporting-text">Awaiting dispatch/arrival</div>
+            </div>
+          </div>
+
+          <!-- Card 3: In Transit -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-info" aria-hidden="true">
+              <i class="bi bi-truck"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">IN TRANSIT</div>
+              <div class="stat-value" id="statDriverInTransit">--</div>
+              <div class="stat-supporting-text">Currently on the way</div>
+            </div>
+          </div>
+
+          <!-- Card 4: Delivered -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-success" aria-hidden="true">
+              <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">DELIVERED</div>
+              <div class="stat-value" id="statDriverDelivered">--</div>
+              <div class="stat-supporting-text">Successfully completed</div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 3. TODAY'S DELIVERIES LIST / TABLE -->
+        <div class="content-card">
+          <div class="content-card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div>
+              <h2 class="content-card-title mb-1">
+                <i class="bi bi-calendar-check me-2 text-primary"></i>Today's Deliveries
+              </h2>
+              <p class="text-muted small mb-0">Active parcels scheduled for your delivery route today.</p>
+            </div>
+            <div>
+              <a href="my-route.html" class="secondary-button btn-sm-custom">
+                <i class="bi bi-signpost-2 me-1"></i> Open Route Map &amp; Stops
+              </a>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead class="table-light">
+                <tr style="font-size: 0.8125rem;">
+                  <th class="ps-4">DELIVERY ID</th>
+                  <th>CUSTOMER</th>
+                  <th>ADDRESS</th>
+                  <th>PRIORITY</th>
+                  <th>STATUS</th>
+                  <th class="pe-4 text-end">ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="driverDeliveriesTableBody">
+                <!-- Dynamically populated by js/driver.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Bootstrap 5 JavaScript Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SmartCourier Configuration & API Service Layer -->
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <!-- SmartCourier Global Layout JavaScript -->
+  <script src="../js/main.js"></script>
+  <!-- SmartCourier Driver Experience JavaScript -->
+  <script src="../js/driver.js"></script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Dashboard – SmartCourier Delivery Management System">
+  <title>Dashboard – SmartCourier Admin</title>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- SmartCourier Global Design System -->
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. TOP HEADER (.top-header)
+       Horizontal top navigation bar spanning across the page
+       ====================================================================== -->
+  <header class="top-header">
+    <div class="d-flex align-items-center">
+      <button class="sidebar-toggle-btn" aria-label="Toggle Navigation Sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+      <a href="dashboard.html" class="header-brand">
+        <div class="brand-icon">
+          <i class="bi bi-truck"></i>
+        </div>
+        <div class="brand-text">
+          Smart<span>Courier</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Search Bar in Upper / Center Area -->
+    <div class="header-search">
+      <div class="header-search-wrapper">
+        <i class="bi bi-search header-search-icon"></i>
+        <input 
+          type="text" 
+          class="header-search-input" 
+          placeholder="Search deliveries, routes, drivers..." 
+          aria-label="Search"
+        >
+        <span class="header-search-shortcut">Ctrl K</span>
+      </div>
+    </div>
+
+    <!-- Actions & User Profile Area on Right -->
+    <div class="header-actions">
+      <!-- Notification Dropdown -->
+      <div class="notification-container position-relative">
+        <button class="header-icon-btn notification-btn" aria-label="Notifications" title="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="header-badge-dot"></span>
+        </button>
+        <div class="custom-dropdown-panel" id="notificationDropdownMenu">
+          <div class="custom-dropdown-header">Recent Notifications</div>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-check-circle text-success"></i>
+            <div>
+              <div class="fw-semibold" style="font-size:0.75rem;">Delivery #SC-1042 Completed</div>
+              <div class="text-muted" style="font-size:0.7rem;">5 minutes ago</div>
+            </div>
+          </a>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-truck text-primary"></i>
+            <div>
+              <div class="fw-semibold" style="font-size:0.75rem;">Driver Amir Khan on route</div>
+              <div class="text-muted" style="font-size:0.7rem;">20 minutes ago</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- User Profile Menu -->
+      <div class="user-profile-menu">
+        <button class="user-profile-btn" aria-label="User Profile">
+          <div class="user-avatar">AD</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Fleet Manager</div>
+          </div>
+          <i class="bi bi-chevron-down user-dropdown-icon"></i>
+        </button>
+        <div class="custom-dropdown-panel" id="profileDropdownMenu">
+          <div class="custom-dropdown-header">Admin Account</div>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-person"></i> My Profile
+          </a>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-gear"></i> System Settings
+          </a>
+          <a href="../driver/dashboard.html" class="custom-dropdown-item">
+            <i class="bi bi-truck text-primary"></i> Switch to Driver Portal
+          </a>
+          <div class="custom-dropdown-divider"></div>
+          <button type="button" class="custom-dropdown-item text-danger logout-trigger" data-action="logout">
+            <i class="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       2. PAGE LAYOUT WRAPPER (.page-layout)
+       Vertical navigation on left, main workspace on right
+       ====================================================================== -->
+  <div class="page-layout">
+
+    <!-- Mobile Offcanvas Backdrop Overlay -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- LEFT NAVIGATION / SIDEBAR (.sidebar) -->
+    <aside class="sidebar">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-title">Operations</li>
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link active">
+            <i class="bi bi-grid-1x2"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="deliveries.html" class="nav-link">
+            <i class="bi bi-box-seam"></i>
+            <span>Deliveries</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="drivers.html" class="nav-link">
+            <i class="bi bi-people"></i>
+            <span>Drivers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="routes.html" class="nav-link">
+            <i class="bi bi-signpost-2"></i>
+            <span>Routes</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-title">Preferences</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link text-danger logout-trigger" data-action="logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         3. MAIN CONTENT AREA (.main-content)
+         ====================================================================== -->
+    <main class="main-content">
+      <div class="section-container">
+
+        <!-- ------------------------------------------------------------------
+             STEP 4A: PAGE HEADER
+             Title, Subtitle & "+ Add Delivery" action button
+             ------------------------------------------------------------------ -->
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">Dashboard</h1>
+            <p class="section-subtitle">Overview of your courier operations</p>
+          </div>
+          <div class="section-actions">
+            <a href="add-delivery.html" class="primary-button">
+              <i class="bi bi-plus-lg"></i> Add Delivery
+            </a>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------
+             STEP 4A: WELCOME SECTION
+             Compact, professional welcome card with logistics icon
+             ------------------------------------------------------------------ -->
+        <section class="welcome-card" aria-label="Welcome Overview">
+          <div class="welcome-card-content">
+            <div class="welcome-card-icon" aria-hidden="true">
+              <i class="bi bi-truck"></i>
+            </div>
+            <div>
+              <h2 class="welcome-card-title" id="welcomeGreetingTitle">Good morning, Admin!</h2>
+              <p class="welcome-card-subtitle">Here's what's happening with your deliveries today.</p>
+            </div>
+          </div>
+          <div class="welcome-card-badge">
+            <i class="bi bi-calendar-check text-primary"></i>
+            <span>Live Dispatch Active</span>
+          </div>
+        </section>
+
+        <!-- ------------------------------------------------------------------
+             STEP 4A: FOUR STATISTICS CARDS
+             1. Total Deliveries | 2. Pending | 3. In Transit | 4. Delivered
+             Numbers populated dynamically via JavaScript (dashboard.js)
+             ------------------------------------------------------------------ -->
+        <section class="stats-grid-row" aria-label="Delivery Statistics">
+
+          <!-- Card 1: TOTAL DELIVERIES -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-primary" aria-hidden="true">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">TOTAL DELIVERIES</div>
+              <div class="stat-value" id="statTotalDeliveries">--</div>
+              <div class="stat-supporting-text">All deliveries</div>
+            </div>
+          </div>
+
+          <!-- Card 2: PENDING -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-warning" aria-hidden="true">
+              <i class="bi bi-clock"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">PENDING</div>
+              <div class="stat-value" id="statPending">--</div>
+              <div class="stat-supporting-text">Awaiting delivery</div>
+            </div>
+          </div>
+
+          <!-- Card 3: IN TRANSIT -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-info" aria-hidden="true">
+              <i class="bi bi-truck"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">IN TRANSIT</div>
+              <div class="stat-value" id="statInTransit">--</div>
+              <div class="stat-supporting-text">Currently on route</div>
+            </div>
+          </div>
+
+          <!-- Card 4: DELIVERED -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper stat-icon-success" aria-hidden="true">
+              <i class="bi bi-check-circle"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">DELIVERED</div>
+              <div class="stat-value" id="statDelivered">--</div>
+              <div class="stat-supporting-text">Successfully delivered</div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ------------------------------------------------------------------
+             STEP 4B: RECENT DELIVERIES SECTION
+             Card with header, filter/search controls, responsive table, and empty state
+             ------------------------------------------------------------------ -->
+        <section class="content-card" aria-label="Recent Deliveries Activity">
+          
+          <!-- Card Header -->
+          <div class="content-card-header">
+            <div>
+              <h2 class="content-card-title">Recent Deliveries</h2>
+              <p class="text-muted mb-0" style="font-size:0.8125rem;">Latest delivery activity</p>
+            </div>
+            <div>
+              <a href="deliveries.html" class="secondary-button btn-sm-custom">
+                View All <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Filter & Search Controls Bar -->
+          <div class="p-3 border-bottom bg-white">
+            <div class="row g-2 align-items-center">
+              <!-- Search Input -->
+              <div class="col-12 col-md-5 col-lg-4">
+                <div class="position-relative">
+                  <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" style="font-size:0.85rem;"></i>
+                  <input 
+                    type="text" 
+                    id="deliverySearchInput" 
+                    class="form-control form-control-sm ps-5" 
+                    placeholder="Search deliveries..." 
+                    aria-label="Search deliveries by ID, customer, address, or driver"
+                    style="border-radius: var(--radius-md); font-size: 0.8125rem; height: 36px;"
+                  >
+                </div>
+              </div>
+
+              <!-- Status Dropdown Filter -->
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="position-relative">
+                  <select 
+                    id="deliveryStatusFilter" 
+                    class="form-select form-select-sm" 
+                    aria-label="Filter deliveries by status"
+                    style="border-radius: var(--radius-md); font-size: 0.8125rem; height: 36px;"
+                  >
+                    <option value="ALL">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Assigned">Assigned</option>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Failed">Failed</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Results Counter & Clear Filter Action -->
+              <div class="col-12 col-sm-6 col-md-3 col-lg-5 text-sm-end text-muted" style="font-size:0.75rem;">
+                <span id="deliveryResultsCount">Showing 0 deliveries</span>
+                <button type="button" id="deliveryFilterResetBtn" class="btn btn-link btn-sm text-decoration-none text-muted p-0 ms-2 d-none">
+                  <i class="bi bi-x-circle me-1"></i>Clear Filters
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table Container (Responsive Horizontal Scroll) -->
+          <div class="table-responsive" style="min-height: 220px;">
+            <table class="table table-hover align-middle mb-0" id="recentDeliveriesTable" style="font-size: 0.85rem;">
+              <thead class="table-light text-muted" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em;">
+                <tr>
+                  <th scope="col" class="ps-4">Delivery ID</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Driver</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="pe-4 text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody id="recentDeliveriesTableBody">
+                <!-- Dynamically populated via dashboard.js -->
+              </tbody>
+            </table>
+
+            <!-- Empty State Container -->
+            <div id="deliveryEmptyState" class="d-none text-center py-5 px-3">
+              <div class="mb-2 text-muted">
+                <i class="bi bi-inbox" style="font-size: 2.5rem; opacity: 0.6;"></i>
+              </div>
+              <h6 class="fw-semibold text-dark mb-1">No deliveries found</h6>
+              <p class="text-muted mb-3" style="font-size: 0.8125rem;">
+                No delivery records match your current search and filter criteria.
+              </p>
+              <button type="button" id="emptyStateResetBtn" class="secondary-button btn-sm-custom">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="content-card-footer">
+            <span class="text-muted" id="tableSummaryText">Showing latest delivery records</span>
+            <a href="deliveries.html" class="primary-button btn-sm-custom">
+              View All in Deliveries <i class="bi bi-chevron-right ms-1"></i>
+            </a>
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Bootstrap 5 JavaScript Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SmartCourier Configuration & API Service Layer -->
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <!-- SmartCourier Global Layout JavaScript (Sidebar, dropdowns, shortcuts) -->
+  <script src="../js/main.js"></script>
+  <!-- SmartCourier Admin Dashboard JavaScript (Statistics data population) -->
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

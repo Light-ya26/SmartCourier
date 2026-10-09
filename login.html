@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign in to SmartCourier – Courier Route Optimization & Delivery Management System">
+  <title>Sign In – SmartCourier</title>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- SmartCourier Global Design System & Login Styles -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="login-page-wrapper">
+
+    <!-- ======================================================================
+         LEFT SIDE: Logistics Visual & Branding Panel (Desktop / Stacked on Mobile)
+         ====================================================================== -->
+    <section class="login-brand-panel" aria-label="Brand Overview">
+      <!-- Top Brand Anchor -->
+      <div class="brand-panel-header">
+        <a href="index.html" class="brand-panel-logo">
+          <div class="logo-box">
+            <i class="bi bi-truck"></i>
+          </div>
+          <div class="logo-title">
+            Smart<span>Courier</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center Logistics Message -->
+      <div class="brand-panel-content">
+        <div class="brand-tagline-badge">
+          <i class="bi bi-lightning-charge-fill"></i> Delivery Management System
+        </div>
+        <h1 class="brand-headline">
+          Smarter routes.<br>
+          <span class="text-highlight">Faster deliveries.</span>
+        </h1>
+        <p class="brand-description">
+          Intelligent multi-stop route optimization, real-time dispatch tracking, and seamless fleet courier operations in one unified workspace.
+        </p>
+
+        <ul class="brand-features-list">
+          <li class="brand-feature-item">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Automated multi-stop courier route optimization</span>
+          </li>
+          <li class="brand-feature-item">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Live delivery status telemetry &amp; recipient updates</span>
+          </li>
+          <li class="brand-feature-item">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Role-based dispatch dashboards for Admins &amp; Drivers</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bottom College Project Notation -->
+      <div class="brand-panel-footer">
+        <span>SmartCourier &copy; 2026</span>
+        <span>College Project &bull; Frontend Phase</span>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         RIGHT SIDE: Login Form Panel & Authentication Card
+         ====================================================================== -->
+    <main class="login-form-panel">
+      <div class="login-card">
+
+        <!-- Card Header with SmartCourier Logo -->
+        <div class="login-card-header">
+          <div class="login-card-logo-badge" aria-hidden="true">
+            <i class="bi bi-truck"></i>
+          </div>
+          <h2 class="login-card-title">Welcome Back</h2>
+          <p class="login-card-subtitle">Sign in to continue to SmartCourier</p>
+        </div>
+
+        <!-- Global Alert Banners (Inside Login Card) -->
+        <!-- Error Alert Banner -->
+        <div id="loginAlertBox" class="login-alert-banner login-alert-error" role="alert" aria-live="polite">
+          <i class="bi bi-exclamation-circle-fill"></i>
+          <span id="loginAlertMessage">Invalid credentials. Please verify and try again.</span>
+        </div>
+
+        <!-- Informational Alert Banner (e.g., Forgot Password message) -->
+        <div id="loginInfoBox" class="login-alert-banner login-alert-info" role="status" aria-live="polite">
+          <i class="bi bi-info-circle-fill"></i>
+          <span id="loginInfoMessage">Password recovery will be available after backend authentication is connected.</span>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" novalidate autocomplete="on">
+
+          <!-- 1. Email / Username Field -->
+          <div class="form-field-group">
+            <label for="loginIdentifier" class="form-field-label">Email or Username</label>
+            <input 
+              type="text" 
+              id="loginIdentifier" 
+              name="identifier"
+              class="form-field-input" 
+              placeholder="e.g. admin@smartcourier.com" 
+              autocomplete="username" 
+              required
+              aria-describedby="identifierError"
+            >
+            <div id="identifierError" class="field-error-text" role="alert">
+              Please enter your email or username.
+            </div>
+          </div>
+
+          <!-- 2. Password Field with Show/Hide Toggle -->
+          <div class="form-field-group">
+            <label for="loginPassword" class="form-field-label">Password</label>
+            <div class="password-input-wrapper">
+              <input 
+                type="password" 
+                id="loginPassword" 
+                name="password"
+                class="form-field-input" 
+                placeholder="Enter your password" 
+                autocomplete="current-password" 
+                required
+                aria-describedby="passwordError"
+              >
+              <button 
+                type="button" 
+                id="togglePasswordBtn" 
+                class="password-toggle-btn" 
+                aria-label="Show password" 
+                title="Toggle password visibility"
+              >
+                <i class="bi bi-eye" id="togglePasswordIcon"></i>
+              </button>
+            </div>
+            <div id="passwordError" class="field-error-text" role="alert">
+              Please enter your password (minimum 6 characters).
+            </div>
+          </div>
+
+          <!-- Options Row: Remember Me & Forgot Password -->
+          <div class="form-options-row">
+            <label class="remember-checkbox-label" for="rememberMeCheckbox">
+              <input type="checkbox" id="rememberMeCheckbox" name="rememberMe">
+              <span>Remember me</span>
+            </label>
+            <a href="#" id="forgotPasswordLink" class="forgot-password-link">Forgot Password?</a>
+          </div>
+
+          <!-- Main Submit Button with Loading State -->
+          <button type="submit" id="loginSubmitBtn" class="primary-button login-submit-btn">
+            <span id="loginBtnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            <span id="loginBtnText">Login</span>
+          </button>
+        </form>
+
+        <!-- Demo Accounts Box (Facilitates College Project Testing & Presentations) -->
+        <div class="demo-accounts-card">
+          <div class="demo-accounts-title">
+            <span>Demo Test Credentials</span>
+            <i class="bi bi-shield-lock text-primary"></i>
+          </div>
+          <div class="demo-chip-group">
+            <div class="demo-chip" id="fillAdminChip" title="Click to autofill Admin credentials">
+              <span class="demo-chip-role"><i class="bi bi-person-badge me-1"></i> Admin</span>
+              <span class="demo-chip-cred">admin@smartcourier.com &bull; Admin123</span>
+            </div>
+            <div class="demo-chip" id="fillDriverChip" title="Click to autofill Driver credentials">
+              <span class="demo-chip-role"><i class="bi bi-truck me-1"></i> Driver</span>
+              <span class="demo-chip-cred">driver@smartcourier.com &bull; Driver123</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Bootstrap 5 JavaScript Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SmartCourier Configuration & API Service Layer -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <!-- Isolated Authentication Script -->
+  <script src="js/auth.js"></script>
+</body>
+</html>

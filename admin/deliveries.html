@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Delivery Management – SmartCourier Route Optimization & Fleet Management">
+  <title>Delivery Management – SmartCourier Admin</title>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- SmartCourier Global Design System -->
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. TOP HEADER (.top-header)
+       ====================================================================== -->
+  <header class="top-header">
+    <div class="d-flex align-items-center">
+      <button class="sidebar-toggle-btn" aria-label="Toggle Navigation Sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+      <a href="dashboard.html" class="header-brand">
+        <div class="brand-icon">
+          <i class="bi bi-truck"></i>
+        </div>
+        <div class="brand-text">
+          Smart<span>Courier</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Search in Top Bar -->
+    <div class="header-search">
+      <div class="header-search-wrapper">
+        <i class="bi bi-search header-search-icon"></i>
+        <input 
+          type="text" 
+          class="header-search-input" 
+          placeholder="Global system search..." 
+          aria-label="Search"
+        >
+        <span class="header-search-shortcut">Ctrl K</span>
+      </div>
+    </div>
+
+    <!-- Actions & User Profile Area on Right -->
+    <div class="header-actions">
+      <!-- Notification Dropdown -->
+      <div class="notification-container position-relative">
+        <button class="header-icon-btn notification-btn" aria-label="Notifications" title="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="header-badge-dot"></span>
+        </button>
+        <div class="custom-dropdown-panel" id="notificationDropdownMenu">
+          <div class="custom-dropdown-header">Recent Notifications</div>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-check-circle text-success"></i>
+            <div>
+              <div class="fw-semibold" style="font-size:0.75rem;">Delivery #SC-1003 Delivered</div>
+              <div class="text-muted" style="font-size:0.7rem;">10m ago</div>
+            </div>
+          </a>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-truck text-primary"></i>
+            <div>
+              <div class="fw-semibold" style="font-size:0.75rem;">Amit Patil is In Transit #SC-1001</div>
+              <div class="text-muted" style="font-size:0.7rem;">25m ago</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- User Profile Menu -->
+      <div class="user-profile-menu">
+        <button class="user-profile-btn" aria-label="User Profile">
+          <div class="user-avatar">AD</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Fleet Manager</div>
+          </div>
+          <i class="bi bi-chevron-down user-dropdown-icon"></i>
+        </button>
+        <div class="custom-dropdown-panel" id="profileDropdownMenu">
+          <div class="custom-dropdown-header">Admin Account</div>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-person"></i> My Profile
+          </a>
+          <a href="#" class="custom-dropdown-item">
+            <i class="bi bi-gear"></i> System Settings
+          </a>
+          <a href="../driver/dashboard.html" class="custom-dropdown-item">
+            <i class="bi bi-truck text-primary"></i> Switch to Driver Portal
+          </a>
+          <div class="custom-dropdown-divider"></div>
+          <button type="button" class="custom-dropdown-item text-danger logout-trigger" data-action="logout">
+            <i class="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       2. PAGE LAYOUT WRAPPER (.page-layout)
+       ====================================================================== -->
+  <div class="page-layout">
+
+    <div class="sidebar-backdrop"></div>
+
+    <!-- LEFT NAVIGATION / SIDEBAR (.sidebar) -->
+    <aside class="sidebar">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-title">Operations</li>
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link">
+            <i class="bi bi-grid-1x2"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="deliveries.html" class="nav-link active">
+            <i class="bi bi-box-seam"></i>
+            <span>Deliveries</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="drivers.html" class="nav-link">
+            <i class="bi bi-people"></i>
+            <span>Drivers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="routes.html" class="nav-link">
+            <i class="bi bi-signpost-2"></i>
+            <span>Routes</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-title">Preferences</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link text-danger logout-trigger" data-action="logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         3. MAIN CONTENT AREA (.main-content)
+         ====================================================================== -->
+    <main class="main-content">
+      <div class="section-container">
+
+        <!-- Page Header -->
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">Delivery Management</h1>
+            <p class="section-subtitle">Manage, track and update all courier deliveries.</p>
+          </div>
+          <div class="section-actions">
+            <a href="add-delivery.html" class="primary-button">
+              <i class="bi bi-plus-lg"></i> Add Delivery
+            </a>
+          </div>
+        </div>
+
+        <!-- Deliveries Main Content Card -->
+        <div class="content-card">
+
+          <!-- Filter / Search Toolbar Area -->
+          <div class="p-3 border-bottom bg-white">
+            <div class="row g-2 align-items-center">
+
+              <!-- 1. Search Box -->
+              <div class="col-12 col-lg-4">
+                <div class="position-relative">
+                  <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" style="font-size:0.85rem;"></i>
+                  <input 
+                    type="text" 
+                    id="deliverySearchInput" 
+                    class="form-control form-control-sm ps-5" 
+                    placeholder="Search by ID, customer, address..." 
+                    aria-label="Search deliveries"
+                    style="border-radius: var(--radius-md); font-size: 0.8125rem; height: 38px;"
+                  >
+                </div>
+              </div>
+
+              <!-- 2. Status Filter -->
+              <div class="col-6 col-sm-4 col-lg-2">
+                <select id="filterStatus" class="form-select form-select-sm" aria-label="Status filter" style="border-radius: var(--radius-md); font-size: 0.8125rem; height: 38px;">
+                  <option value="ALL">All Status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Assigned">Assigned</option>
+                  <option value="In Transit">In Transit</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Failed">Failed</option>
+                </select>
+              </div>
+
+              <!-- 3. Driver Filter -->
+              <div class="col-6 col-sm-4 col-lg-2">
+                <select id="filterDriver" class="form-select form-select-sm" aria-label="Driver filter" style="border-radius: var(--radius-md); font-size: 0.8125rem; height: 38px;">
+                  <option value="ALL">All Drivers</option>
+                  <option value="Unassigned">Unassigned</option>
+                </select>
+              </div>
+
+              <!-- 4. Priority Filter -->
+              <div class="col-6 col-sm-4 col-lg-2">
+                <select id="filterPriority" class="form-select form-select-sm" aria-label="Priority filter" style="border-radius: var(--radius-md); font-size: 0.8125rem; height: 38px;">
+                  <option value="ALL">All Priority</option>
+                  <option value="High">High</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
+
+              <!-- 5. Date Filter & Clear Button -->
+              <div class="col-6 col-lg-2 d-flex gap-1 align-items-center">
+                <input 
+                  type="date" 
+                  id="filterDate" 
+                  class="form-control form-control-sm" 
+                  title="Filter by delivery date" 
+                  aria-label="Date filter"
+                  style="border-radius: var(--radius-md); font-size: 0.8125rem; height: 38px;"
+                >
+                <button 
+                  type="button" 
+                  id="clearFiltersBtn" 
+                  class="btn btn-sm btn-outline-secondary d-none text-nowrap" 
+                  title="Clear all filters"
+                  style="height: 38px; border-radius: var(--radius-md);"
+                >
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Active Filter Count Display -->
+            <div class="d-flex justify-content-between align-items-center mt-2 pt-1 text-muted" style="font-size: 0.75rem;">
+              <span id="deliveryCountBadge">Loading deliveries…</span>
+              <span><i class="bi bi-arrow-repeat me-1"></i>Real-time frontend filter active</span>
+            </div>
+          </div>
+
+          <!-- Main Delivery Table Container -->
+          <div class="table-responsive" style="min-height: 320px;">
+            <table class="table table-hover align-middle mb-0" id="deliveriesTable" style="font-size: 0.875rem;">
+              <thead class="table-light text-muted" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em;">
+                <tr>
+                  <th scope="col" class="ps-4">Delivery ID</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Driver</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="pe-4 text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="deliveriesTableBody">
+                <!-- Dynamically rendered via deliveries.js -->
+              </tbody>
+            </table>
+
+            <!-- Polished Empty State Container -->
+            <div id="deliveriesEmptyState" class="d-none sc-empty-state">
+              <div class="sc-empty-state-icon">
+                <i class="bi bi-search"></i>
+              </div>
+              <h5 class="sc-empty-state-title">No deliveries found</h5>
+              <p class="sc-empty-state-text">
+                No delivery records match your current search and filter combination. Try clearing your filters or search terms.
+              </p>
+              <button type="button" id="emptyStateResetBtn" class="secondary-button btn-sm-custom">
+                <i class="bi bi-arrow-counterclockwise"></i> Clear Filters
+              </button>
+            </div>
+          </div>
+
+          <!-- Table Footer -->
+          <div class="content-card-footer">
+            <span class="text-muted" style="font-size:0.8125rem;">
+              SmartCourier Delivery Fleet Roster
+            </span>
+            <div class="d-flex gap-2">
+              <a href="add-delivery.html" class="primary-button btn-sm-custom">
+                <i class="bi bi-plus-lg"></i> Create Delivery
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ======================================================================
+       VIEW DELIVERY DETAILS MODAL
+       ====================================================================== -->
+  <div class="modal fade" id="viewDeliveryModal" tabindex="-1" aria-labelledby="viewDeliveryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-lg" style="border-radius: var(--radius-xl);">
+        
+        <!-- Modal Header -->
+        <div class="modal-header border-bottom py-3 px-4">
+          <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon" style="width:34px;height:34px;font-size:1rem;">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold text-dark mb-0" id="viewDeliveryModalLabel">
+                Delivery Details <span id="viewModalId" class="text-primary font-monospace ms-1"></span>
+              </h5>
+              <span class="text-muted" style="font-size:0.75rem;">Courier Dispatch Information</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body p-4">
+          <div class="row g-3">
+
+            <!-- Status & Priority Banner + Admin Quick Status Control -->
+            <div class="col-12">
+              <div class="p-3 rounded border bg-light d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3">
+                  <div>
+                    <span class="text-muted small d-block" style="font-size:0.75rem;">CURRENT STATUS:</span>
+                    <span id="viewModalStatus"></span>
+                  </div>
+                  <div class="border-start ps-3">
+                    <span class="text-muted small d-block" style="font-size:0.75rem;">PRIORITY:</span>
+                    <span id="viewModalPriority"></span>
+                  </div>
+                </div>
+                <!-- Admin Quick Status Change -->
+                <div class="d-flex align-items-center gap-2">
+                  <label for="viewModalQuickStatusSelect" class="small fw-semibold text-secondary mb-0" style="font-size:0.75rem;">QUICK STATUS UPDATE:</label>
+                  <select id="viewModalQuickStatusSelect" class="form-select form-select-sm" style="width: auto; font-size:0.8125rem;">
+                    <option value="Pending">Pending</option>
+                    <option value="Assigned">Assigned</option>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Out for Delivery">Out for Delivery</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Failed">Failed</option>
+                  </select>
+                  <button type="button" id="btnAdminApplyStatus" class="primary-button btn-sm-custom" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">
+                    <i class="bi bi-check-lg"></i> Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer & Contact Information -->
+            <div class="col-12 col-md-6">
+              <div class="card h-100 border p-3">
+                <h6 class="fw-bold text-dark mb-3 pb-1 border-bottom" style="font-size:0.875rem;">
+                  <i class="bi bi-person me-2 text-primary"></i>Customer &amp; Contact
+                </h6>
+                <div class="mb-2">
+                  <span class="text-muted small d-block">Recipient Name</span>
+                  <span id="viewModalCustomer" class="fw-semibold text-dark"></span>
+                </div>
+                <div class="mb-2">
+                  <span class="text-muted small d-block">Phone Number</span>
+                  <span id="viewModalPhone" class="fw-medium text-dark font-monospace"></span>
+                </div>
+                <div>
+                  <span class="text-muted small d-block">Email Address</span>
+                  <span id="viewModalEmail" class="text-dark"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Package Details & Date -->
+            <div class="col-12 col-md-6">
+              <div class="card h-100 border p-3">
+                <h6 class="fw-bold text-dark mb-3 pb-1 border-bottom" style="font-size:0.875rem;">
+                  <i class="bi bi-box me-2 text-primary"></i>Package &amp; Assignment
+                </h6>
+                <div class="mb-2">
+                  <span class="text-muted small d-block">Package Description</span>
+                  <span id="viewModalPackage" class="fw-semibold text-dark"></span>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-6">
+                    <span class="text-muted small d-block">Weight</span>
+                    <span id="viewModalWeight" class="fw-medium text-dark"></span>
+                  </div>
+                  <div class="col-6">
+                    <span class="text-muted small d-block">Scheduled Date</span>
+                    <span id="viewModalDate" class="fw-medium text-dark"></span>
+                  </div>
+                </div>
+                <div>
+                  <span class="text-muted small d-block">Assigned Driver</span>
+                  <span id="viewModalDriver" class="fw-semibold text-primary"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Destination Address -->
+            <div class="col-12">
+              <div class="card border p-3">
+                <h6 class="fw-bold text-dark mb-2 pb-1 border-bottom" style="font-size:0.875rem;">
+                  <i class="bi bi-geo-alt me-2 text-danger"></i>Destination Address
+                </h6>
+                <div class="mb-2">
+                  <span class="text-muted small d-block">Address</span>
+                  <span id="viewModalAddress" class="fw-medium text-dark"></span>
+                </div>
+                <div>
+                  <span class="text-muted small d-block">Geographic Coordinates</span>
+                  <span id="viewModalCoordinates" class="text-muted font-monospace small"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 1. STATUS TIMELINE -->
+            <div class="col-12">
+              <div class="card border p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom">
+                  <h6 class="fw-bold text-dark mb-0" style="font-size:0.875rem;">
+                    <i class="bi bi-signpost-2 me-2 text-primary"></i>Delivery Status Timeline
+                  </h6>
+                  <span class="badge bg-light text-muted border" style="font-size:0.68rem;">Live Milestones</span>
+                </div>
+                <div id="viewModalTimelineContainer">
+                  <!-- Dynamically rendered timeline stepper via deliveries.js -->
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. DRIVER INFORMATION -->
+            <div class="col-12">
+              <div class="card border p-3">
+                <h6 class="fw-bold text-dark mb-2 pb-1 border-bottom" style="font-size:0.875rem;">
+                  <i class="bi bi-person-badge me-2 text-primary"></i>Driver Information
+                </h6>
+                <div id="viewModalDriverCard">
+                  <!-- Dynamically rendered driver card via deliveries.js -->
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. DELIVERY NOTES -->
+            <div class="col-12">
+              <div class="card border p-3">
+                <h6 class="fw-bold text-dark mb-1" style="font-size:0.8125rem;">
+                  <i class="bi bi-card-text me-1 text-muted"></i>Handling Notes &amp; Instructions
+                </h6>
+                <p id="viewModalNotes" class="text-secondary small mb-0 fst-italic"></p>
+              </div>
+            </div>
+
+            <!-- 4. ACTIVITY LOG (OPTIONAL ACTIVITY SECTION) -->
+            <div class="col-12">
+              <div class="card border p-3">
+                <h6 class="fw-bold text-dark mb-2 pb-1 border-bottom" style="font-size:0.8125rem;">
+                  <i class="bi bi-clock-history me-1 text-muted"></i>Dispatch Activity Log
+                </h6>
+                <div id="viewModalActivityLog">
+                  <!-- Dynamically rendered activity list via deliveries.js -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer border-top py-2 px-4 bg-light">
+          <button type="button" class="secondary-button btn-sm-custom" data-bs-dismiss="modal">Close</button>
+          <a href="#" id="viewModalEditLink" class="primary-button btn-sm-custom">
+            <i class="bi bi-pencil me-1"></i> Edit Record
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       DELETE CONFIRMATION MODAL
+       ====================================================================== -->
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" style="max-width:380px;">
+      <div class="modal-content border-0 shadow-lg" style="border-radius: var(--radius-lg);">
+        <div class="modal-body p-4 text-center">
+          <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle bg-danger-subtle text-danger" style="width: 56px; height: 56px; font-size: 1.6rem;">
+            <i class="bi bi-trash3-fill"></i>
+          </div>
+          <h5 class="fw-bold text-dark mb-2" id="deleteConfirmModalLabel">Delete Delivery?</h5>
+          <p class="text-muted small mb-0">
+            Are you sure you want to delete delivery <strong id="deleteModalTargetId" class="text-dark"></strong> for <span id="deleteModalTargetName" class="text-dark"></span>? This action will remove the record.
+          </p>
+        </div>
+        <div class="modal-footer border-top p-2 bg-light d-flex justify-content-end gap-2">
+          <button type="button" class="secondary-button btn-sm-custom" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" id="confirmDeleteBtn" class="btn btn-danger btn-sm" style="border-radius: var(--radius-md);">
+            <i class="bi bi-trash me-1"></i> Confirm Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JavaScript Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SmartCourier Configuration & API Service Layer -->
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <!-- SmartCourier Global Layout JavaScript -->
+  <script src="../js/main.js"></script>
+  <!-- SmartCourier Delivery Management JavaScript -->
+  <script src="../js/deliveries.js"></script>
+</body>
+</html>

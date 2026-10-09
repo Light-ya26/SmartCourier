@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartCourier – Courier Route Optimization & Delivery Management System. Streamline your logistics with intelligent route planning and real-time delivery tracking.">
+  <title>SmartCourier – Courier Route Optimization & Delivery Management</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- SmartCourier Styles -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    /* ---------- Landing Page Specific ---------- */
+    .sc-landing-nav {
+      background: var(--sc-white);
+      border-bottom: 1px solid var(--sc-border-color);
+      padding: 0.75rem 0;
+    }
+
+    .sc-landing-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--sc-gray-900);
+      text-decoration: none;
+    }
+
+    .sc-landing-brand i {
+      font-size: 1.4rem;
+      color: var(--sc-primary);
+    }
+
+    .sc-landing-brand span {
+      color: var(--sc-primary);
+    }
+
+    /* Hero */
+    .sc-hero {
+      background: linear-gradient(135deg, var(--sc-gray-900) 0%, #1a2744 100%);
+      padding: 6rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sc-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: var(--sc-primary);
+      opacity: 0.06;
+      border-radius: 50%;
+      top: -200px;
+      right: -150px;
+    }
+
+    .sc-hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--sc-white);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .sc-hero h1 span {
+      color: var(--sc-primary);
+    }
+
+    .sc-hero p {
+      font-size: 1.125rem;
+      color: var(--sc-gray-400);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+
+    .sc-hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .sc-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(27, 110, 243, 0.15);
+      color: var(--sc-primary);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--sc-radius-full);
+      margin-bottom: 1.25rem;
+    }
+
+    .sc-hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sc-hero-mockup {
+      background: var(--sc-white);
+      border-radius: var(--sc-radius-xl);
+      box-shadow: var(--sc-shadow-xl);
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .sc-hero-mockup-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .sc-hero-mockup-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--sc-gray-200);
+    }
+
+    .sc-hero-mockup-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .sc-hero-mockup-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .sc-hero-mockup-card {
+      flex: 1;
+      background: var(--sc-gray-50);
+      border-radius: var(--sc-radius-md);
+      padding: 0.85rem;
+      border: 1px solid var(--sc-gray-100);
+    }
+
+    .sc-hero-mockup-card .label {
+      font-size: 0.7rem;
+      color: var(--sc-gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .sc-hero-mockup-card .value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--sc-gray-800);
+    }
+
+    .sc-hero-mockup-map {
+      background: var(--sc-gray-100);
+      border-radius: var(--sc-radius-md);
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sc-gray-400);
+      font-size: 0.8rem;
+      border: 1px dashed var(--sc-gray-300);
+    }
+
+    /* Features */
+    .sc-features {
+      padding: 5rem 0;
+    }
+
+    .sc-features-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .sc-features-title h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--sc-gray-900);
+      margin-bottom: 0.5rem;
+    }
+
+    .sc-features-title p {
+      color: var(--sc-gray-500);
+      font-size: 1rem;
+    }
+
+    .sc-feature-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: var(--sc-radius-lg);
+      border: 1px solid var(--sc-border-color);
+      background: var(--sc-white);
+      transition: all var(--sc-transition);
+      height: 100%;
+    }
+
+    .sc-feature-card:hover {
+      box-shadow: var(--sc-shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .sc-feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--sc-radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+    }
+
+    .sc-feature-card h5 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--sc-gray-800);
+      margin-bottom: 0.5rem;
+    }
+
+    .sc-feature-card p {
+      font-size: 0.875rem;
+      color: var(--sc-gray-500);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .sc-landing-footer {
+      background: var(--sc-gray-900);
+      color: var(--sc-gray-400);
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.8125rem;
+    }
+
+    @media (max-width: 767.98px) {
+      .sc-hero {
+        padding: 3rem 0;
+        text-align: center;
+      }
+      .sc-hero h1 { font-size: 2rem; }
+      .sc-hero p { margin-left: auto; margin-right: auto; }
+      .sc-hero-actions { justify-content: center; }
+      .sc-hero-visual { margin-top: 2rem; }
+    }
+  </style>
+</head>
+<body style="background: var(--sc-white);">
+
+  <!-- ====== Navbar ====== -->
+  <nav class="sc-landing-nav sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="sc-landing-brand">
+        <i class="bi bi-truck"></i>
+        Smart<span>Courier</span>
+      </a>
+      <a href="login.html" class="sc-btn sc-btn-primary sc-btn-sm">
+        <i class="bi bi-box-arrow-in-right"></i> Sign In
+      </a>
+    </div>
+  </nav>
+
+  <!-- ====== Hero ====== -->
+  <section class="sc-hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="sc-hero-badge">
+            <i class="bi bi-lightning-charge-fill"></i> Intelligent Route Optimization
+          </div>
+          <h1>Deliver Smarter, <span>Not Harder</span></h1>
+          <p>Optimize courier routes, track deliveries in real time, and manage your entire fleet from one clean dashboard. Built for speed and simplicity.</p>
+          <div class="sc-hero-actions">
+            <a href="login.html" class="sc-btn sc-btn-primary sc-btn-lg">
+              <i class="bi bi-arrow-right-circle"></i> Get Started
+            </a>
+            <a href="#features" class="sc-btn sc-btn-secondary sc-btn-lg" style="border-color: rgba(255,255,255,0.2); color: var(--sc-gray-300); background: transparent;">
+              <i class="bi bi-grid-3x3-gap"></i> View Features
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 sc-hero-visual">
+          <div class="sc-hero-mockup">
+            <div class="sc-hero-mockup-bar">
+              <div class="sc-hero-mockup-dot" style="background:#EF4444;"></div>
+              <div class="sc-hero-mockup-dot" style="background:#F59E0B;"></div>
+              <div class="sc-hero-mockup-dot" style="background:#0CAF60;"></div>
+            </div>
+            <div class="sc-hero-mockup-content">
+              <div class="sc-hero-mockup-row">
+                <div class="sc-hero-mockup-card">
+                  <div class="label">Deliveries</div>
+                  <div class="value" style="color:var(--sc-primary);">1,248</div>
+                </div>
+                <div class="sc-hero-mockup-card">
+                  <div class="label">Active Drivers</div>
+                  <div class="value" style="color:var(--sc-success);">18</div>
+                </div>
+                <div class="sc-hero-mockup-card">
+                  <div class="label">On Time</div>
+                  <div class="value" style="color:var(--sc-info);">96%</div>
+                </div>
+              </div>
+              <div class="sc-hero-mockup-map">
+                <i class="bi bi-geo-alt me-1"></i> Map — Route Preview
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Features ====== -->
+  <section class="sc-features" id="features">
+    <div class="container">
+      <div class="sc-features-title">
+        <h2>Everything You Need to Manage Deliveries</h2>
+        <p>A complete toolkit for courier operations, from dispatch to doorstep.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="sc-feature-card">
+            <div class="sc-feature-icon" style="background:var(--sc-primary-light); color:var(--sc-primary);">
+              <i class="bi bi-geo-alt"></i>
+            </div>
+            <h5>Route Optimization</h5>
+            <p>Smart algorithms to find the shortest, fastest delivery routes and reduce fuel costs.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="sc-feature-card">
+            <div class="sc-feature-icon" style="background:var(--sc-success-light); color:var(--sc-success);">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <h5>Delivery Tracking</h5>
+            <p>Track every parcel from pickup to delivery with real-time status updates.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="sc-feature-card">
+            <div class="sc-feature-icon" style="background:var(--sc-warning-light); color:var(--sc-warning);">
+              <i class="bi bi-people"></i>
+            </div>
+            <h5>Driver Management</h5>
+            <p>Assign deliveries, monitor performance, and manage your drivers efficiently.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="sc-feature-card">
+            <div class="sc-feature-icon" style="background:var(--sc-info-light); color:var(--sc-info);">
+              <i class="bi bi-bar-chart-line"></i>
+            </div>
+            <h5>Analytics Dashboard</h5>
+            <p>Actionable insights on delivery performance, driver utilization, and trends.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Footer ====== -->
+  <footer class="sc-landing-footer">
+    <div class="container">
+      <p class="mb-0">&copy; 2026 SmartCourier. College Project — Courier Route Optimization & Delivery Management System.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SmartCourier Configuration & API Service Layer -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

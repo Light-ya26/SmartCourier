@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Add New Delivery – SmartCourier Route Optimization & Dispatch">
+  <title>Add New Delivery – SmartCourier Admin</title>
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- SmartCourier Global Design System -->
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. TOP HEADER (.top-header)
+       ====================================================================== -->
+  <header class="top-header">
+    <div class="d-flex align-items-center">
+      <button class="sidebar-toggle-btn" aria-label="Toggle Navigation Sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+      <a href="dashboard.html" class="header-brand">
+        <div class="brand-icon">
+          <i class="bi bi-truck"></i>
+        </div>
+        <div class="brand-text">
+          Smart<span>Courier</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Top Bar Search -->
+    <div class="header-search">
+      <div class="header-search-wrapper">
+        <i class="bi bi-search header-search-icon"></i>
+        <input 
+          type="text" 
+          class="header-search-input" 
+          placeholder="Global system search..." 
+          aria-label="Search"
+        >
+        <span class="header-search-shortcut">Ctrl K</span>
+      </div>
+    </div>
+
+    <!-- Actions & User Profile Area on Right -->
+    <div class="header-actions">
+      <!-- User Profile Menu -->
+      <div class="user-profile-menu">
+        <button class="user-profile-btn" aria-label="User Profile">
+          <div class="user-avatar">AD</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Fleet Manager</div>
+          </div>
+          <i class="bi bi-chevron-down user-dropdown-icon"></i>
+        </button>
+        <div class="custom-dropdown-panel" id="profileDropdownMenu">
+          <div class="custom-dropdown-header">Admin Account</div>
+          <a href="#" class="custom-dropdown-item"><i class="bi bi-person"></i> My Profile</a>
+          <a href="#" class="custom-dropdown-item"><i class="bi bi-gear"></i> System Settings</a>
+          <div class="custom-dropdown-divider"></div>
+          <button type="button" class="custom-dropdown-item text-danger logout-trigger" data-action="logout">
+            <i class="bi bi-box-arrow-left"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       2. PAGE LAYOUT WRAPPER (.page-layout)
+       ====================================================================== -->
+  <div class="page-layout">
+
+    <div class="sidebar-backdrop"></div>
+
+    <!-- LEFT NAVIGATION / SIDEBAR (.sidebar) -->
+    <aside class="sidebar">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-title">Operations</li>
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link">
+            <i class="bi bi-grid-1x2"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="deliveries.html" class="nav-link active">
+            <i class="bi bi-box-seam"></i>
+            <span>Deliveries</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="drivers.html" class="nav-link">
+            <i class="bi bi-people"></i>
+            <span>Drivers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="routes.html" class="nav-link">
+            <i class="bi bi-signpost-2"></i>
+            <span>Routes</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-title">Preferences</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link text-danger logout-trigger" data-action="logout">
+          <i class="bi bi-box-arrow-left"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         3. MAIN CONTENT AREA (.main-content)
+         ====================================================================== -->
+    <main class="main-content">
+      <div class="section-container" style="max-width: 960px;">
+
+        <!-- Page Header -->
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">Add New Delivery</h1>
+            <p class="section-subtitle">Create and dispatch a new courier delivery order.</p>
+          </div>
+          <div class="section-actions d-flex gap-2">
+            <button type="button" id="btnAutofillDemoDelivery" class="secondary-button" title="Fill form with sample parcel data for demonstration">
+              <i class="bi bi-magic me-1 text-primary"></i> Demo Auto-Fill
+            </button>
+            <a href="deliveries.html" class="secondary-button">
+              <i class="bi bi-arrow-left"></i> Back to Deliveries
+            </a>
+          </div>
+        </div>
+
+        <!-- Success Message Alert Banner -->
+        <div id="formSuccessAlert" class="alert alert-success d-none d-flex align-items-center gap-2 border-0 shadow-sm" role="alert" style="border-radius: var(--radius-md);">
+          <i class="bi bi-check-circle-fill fs-5"></i>
+          <div>
+            <strong>Delivery order registered!</strong> Redirecting you to the Delivery Management list…
+          </div>
+        </div>
+
+        <!-- Add Delivery Form Card -->
+        <div class="content-card">
+          <div class="content-card-body p-4">
+            <form id="addDeliveryForm" novalidate>
+
+              <!-- Section 1: Customer Information -->
+              <div class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                  <div class="brand-icon" style="width:30px;height:30px;font-size:0.9rem;">
+                    <i class="bi bi-person"></i>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-0" style="font-size:1.05rem;">Customer Information</h5>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-12 col-md-4">
+                    <label for="customerName" class="form-label small fw-semibold text-dark">
+                      Customer Name <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" id="customerName" class="form-control" placeholder="e.g. Ramesh Patel" required>
+                    <div class="invalid-feedback">Please provide customer name.</div>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label for="customerPhone" class="form-label small fw-semibold text-dark">
+                      Phone Number <span class="text-danger">*</span>
+                    </label>
+                    <input type="tel" id="customerPhone" class="form-control" placeholder="e.g. +91 98765 43210" required>
+                    <div class="invalid-feedback">Please provide contact phone number.</div>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label for="customerEmail" class="form-label small fw-semibold text-dark">
+                      Email Address <span class="text-danger">*</span>
+                    </label>
+                    <input type="email" id="customerEmail" class="form-control" placeholder="e.g. ramesh@example.com" required>
+                    <div class="invalid-feedback">Please provide valid email address.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 2: Delivery Destination Information -->
+              <div class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                  <div class="brand-icon" style="width:30px;height:30px;font-size:0.9rem; background-color: var(--color-danger);">
+                    <i class="bi bi-geo-alt"></i>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-0" style="font-size:1.05rem;">Delivery Location</h5>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label for="deliveryAddress" class="form-label small fw-semibold text-dark">
+                      Street Address <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" id="deliveryAddress" class="form-control" placeholder="Building, street, landmark, area" required>
+                    <div class="invalid-feedback">Please provide street delivery address.</div>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label for="deliveryCity" class="form-label small fw-semibold text-dark">
+                      City <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" id="deliveryCity" class="form-control" placeholder="e.g. Pune" value="Pune" required>
+                    <div class="invalid-feedback">City is required.</div>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label for="deliveryPostalCode" class="form-label small fw-semibold text-dark">
+                      Postal Code <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" id="deliveryPostalCode" class="form-control" placeholder="e.g. 411001" required>
+                    <div class="invalid-feedback">Postal code is required.</div>
+                  </div>
+
+                  <div class="col-6 col-md-2">
+                    <label for="deliveryLatitude" class="form-label small fw-semibold text-dark">Latitude</label>
+                    <input type="number" step="0.0001" id="deliveryLatitude" class="form-control" placeholder="18.5204" value="18.5204">
+                  </div>
+
+                  <div class="col-6 col-md-2">
+                    <label for="deliveryLongitude" class="form-label small fw-semibold text-dark">Longitude</label>
+                    <input type="number" step="0.0001" id="deliveryLongitude" class="form-control" placeholder="73.8567" value="73.8567">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 3: Package Information -->
+              <div class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                  <div class="brand-icon" style="width:30px;height:30px;font-size:0.9rem; background-color: var(--color-warning);">
+                    <i class="bi bi-box-seam"></i>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-0" style="font-size:1.05rem;">Package &amp; Dispatch Details</h5>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-12 col-md-5">
+                    <label for="packageDesc" class="form-label small fw-semibold text-dark">
+                      Package Description <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" id="packageDesc" class="form-control" placeholder="e.g. High-End Smartphone &amp; Accessories" required>
+                    <div class="invalid-feedback">Package description is required.</div>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="packageWeight" class="form-label small fw-semibold text-dark">
+                      Weight (kg) <span class="text-danger">*</span>
+                    </label>
+                    <input type="number" step="0.1" min="0.1" id="packageWeight" class="form-control" placeholder="e.g. 1.2" required>
+                    <div class="invalid-feedback">Weight is required.</div>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label for="packagePriority" class="form-label small fw-semibold text-dark">
+                      Priority <span class="text-danger">*</span>
+                    </label>
+                    <select id="packagePriority" class="form-select" required>
+                      <option value="Normal" selected>Normal Priority</option>
+                      <option value="High">High Priority (Urgent)</option>
+                      <option value="Low">Low Priority (Flexible)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 4: Driver Assignment & Date -->
+              <div class="mb-4">
+                <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                  <div class="brand-icon" style="width:30px;height:30px;font-size:0.9rem; background-color: var(--color-success);">
+                    <i class="bi bi-person-badge"></i>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-0" style="font-size:1.05rem;">Assignment &amp; Schedule</h5>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label for="assignDriver" class="form-label small fw-semibold text-dark">Assign Driver</label>
+                    <select id="assignDriver" class="form-select">
+                      <option value="Unassigned">Unassigned (Hold in Queue)</option>
+                      <option value="Amit Patil">Amit Patil (Camp / Pune Central)</option>
+                      <option value="Rohit Jadhav">Rohit Jadhav (Alandi / North Pune)</option>
+                      <option value="Sahil More">Sahil More (Wakad / Hinjawadi)</option>
+                      <option value="Aman Shinde">Aman Shinde (Kharadi / Hadapsar)</option>
+                      <option value="Karan Verma">Karan Verma (Baner / Kothrud)</option>
+                    </select>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <label for="deliveryDate" class="form-label small fw-semibold text-dark">
+                      Scheduled Delivery Date <span class="text-danger">*</span>
+                    </label>
+                    <input type="date" id="deliveryDate" class="form-control" value="2026-10-08" required>
+                    <div class="invalid-feedback">Please select scheduled delivery date.</div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="deliveryNotes" class="form-label small fw-semibold text-dark">Handling Instructions / Notes</label>
+                    <textarea id="deliveryNotes" class="form-control" rows="2" placeholder="e.g. Call customer before arrival. Ring doorbell twice."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Buttons -->
+              <div class="d-flex align-items-center justify-content-end gap-2 pt-3 border-top">
+                <a href="deliveries.html" class="secondary-button">Cancel</a>
+                <button type="submit" id="submitDeliveryBtn" class="primary-button">
+                  <i class="bi bi-check-lg"></i> Save Delivery
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Bootstrap 5 JavaScript Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SmartCourier Configuration & API Service Layer -->
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <!-- SmartCourier Global Layout JavaScript -->
+  <script src="../js/main.js"></script>
+  <!-- SmartCourier Delivery Management JavaScript -->
+  <script src="../js/deliveries.js"></script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+/* ===================================================
+   SmartCourier – Dashboard-Specific Styles
+   =================================================== */
+
+/* --sc-* variable bridge for dashboard pages */
+:root {
+  --sc-primary:        #F97316;
+  --sc-primary-hover:  #EA580C;
+  --sc-primary-light:  #FFF7ED;
+  --sc-primary-subtle: #FED7AA;
+  --sc-success:        #16A34A;
+  --sc-success-light:  #F0FDF4;
+  --sc-warning:        #C2410C;
+  --sc-warning-light:  #FFF7ED;
+  --sc-danger:         #DC2626;
+  --sc-danger-light:   #FEF2F2;
+  --sc-info:           #2563EB;
+  --sc-info-light:     #EFF6FF;
+
+  --sc-white:          #FFFFFF;
+  --sc-gray-50:        #FAFAF9;
+  --sc-gray-100:       #F4F4F5;
+  --sc-gray-200:       #E4E4E7;
+  --sc-gray-300:       #D4D4D8;
+  --sc-gray-400:       #A1A1AA;
+  --sc-gray-500:       #71717A;
+  --sc-gray-600:       #52525B;
+  --sc-gray-700:       #3F3F46;
+  --sc-gray-800:       #27272A;
+  --sc-gray-900:       #18181B;
+
+  --sc-border-color:   #E4E4E7;
+  --sc-font-family:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sc-radius-sm:      0.375rem;
+  --sc-radius-md:      0.5rem;
+  --sc-radius-lg:      0.75rem;
+  --sc-radius-full:    9999px;
+  --sc-transition:     0.15s ease;
+
+  --sc-space-xs:       0.25rem;
+  --sc-space-sm:       0.5rem;
+  --sc-space-md:       0.75rem;
+  --sc-space-lg:       1.25rem;
+  --sc-space-xl:       1.75rem;
+
+  --sc-fs-xs:          0.6875rem;
+  --sc-fs-sm:          0.8125rem;
+  --sc-fs-base:        0.875rem;
+}
+.sc-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sc-space-lg);
+  margin-bottom: var(--sc-space-xl);
+}
+
+@media (max-width: 1199.98px) {
+  .sc-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .sc-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ---------- Dashboard Charts Area ---------- */
+.sc-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--sc-space-lg);
+  margin-bottom: var(--sc-space-xl);
+}
+
+@media (max-width: 991.98px) {
+  .sc-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ---------- Activity / Recent Items List ---------- */
+.sc-activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sc-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sc-space-md);
+  padding: var(--sc-space-md) 0;
+  border-bottom: 1px solid var(--sc-gray-100);
+}
+
+.sc-activity-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sc-activity-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--sc-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.sc-activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.sc-activity-text {
+  font-size: var(--sc-fs-base);
+  color: var(--sc-gray-700);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sc-activity-text strong {
+  font-weight: 600;
+  color: var(--sc-gray-800);
+}
+
+.sc-activity-time {
+  font-size: var(--sc-fs-xs);
+  color: var(--sc-gray-400);
+  margin-top: 2px;
+}
+
+
+/* ---------- Quick Actions ---------- */
+.sc-quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sc-space-sm);
+}
+
+.sc-quick-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sc-space-xs);
+  padding: var(--sc-space-md);
+  background: var(--sc-gray-50);
+  border: 1px solid var(--sc-gray-200);
+  border-radius: var(--sc-radius-md);
+  cursor: pointer;
+  transition: all var(--sc-transition);
+  font-family: var(--sc-font-family);
+  color: var(--sc-gray-600);
+  font-size: var(--sc-fs-sm);
+  font-weight: 500;
+  text-align: center;
+}
+
+.sc-quick-action-btn i {
+  font-size: 1.3rem;
+  color: var(--sc-primary);
+}
+
+.sc-quick-action-btn:hover {
+  background: var(--sc-primary-light);
+  border-color: var(--sc-primary-subtle);
+  color: var(--sc-primary);
+}
+
+
+/* ---------- Delivery Progress ---------- */
+.sc-progress-bar-wrapper {
+  background: var(--sc-gray-100);
+  border-radius: var(--sc-radius-full);
+  height: 8px;
+  overflow: hidden;
+}
+
+.sc-progress-bar {
+  height: 100%;
+  border-radius: var(--sc-radius-full);
+  background: var(--sc-primary);
+  transition: width 0.4s ease;
+}
+
+.sc-progress-bar.success { background: var(--sc-success); }
+.sc-progress-bar.warning { background: var(--sc-warning); }
+.sc-progress-bar.danger  { background: var(--sc-danger);  }
+
+
+/* ---------- Driver Status Indicator ---------- */
+.sc-driver-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--sc-fs-sm);
+  font-weight: 500;
+}
+
+.sc-driver-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.sc-driver-status-dot.online  { background: var(--sc-success); }
+.sc-driver-status-dot.offline { background: var(--sc-gray-400); }
+.sc-driver-status-dot.busy    { background: var(--sc-warning); }
+
+
+/* ---------- Map Placeholder ---------- */
+.sc-map-placeholder {
+  background: var(--sc-gray-100);
+  border-radius: var(--sc-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--sc-space-sm);
+  color: var(--sc-gray-400);
+  font-size: var(--sc-fs-sm);
+  min-height: 300px;
+  border: 2px dashed var(--sc-gray-300);
+}
+
+.sc-map-placeholder i {
+  font-size: 2.5rem;
+}
+
+
+/* ---------- Delivery Timeline ---------- */
+.sc-timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.sc-timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--sc-gray-200);
+}
+
+.sc-timeline-item {
+  position: relative;
+  padding-bottom: var(--sc-space-lg);
+}
+
+.sc-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.sc-timeline-dot {
+  position: absolute;
+  left: -22px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--sc-gray-300);
+  border: 2px solid var(--sc-white);
+  box-shadow: 0 0 0 2px var(--sc-gray-200);
+}
+
+.sc-timeline-dot.completed { background: var(--sc-success); box-shadow: 0 0 0 2px var(--sc-success-light); }
+.sc-timeline-dot.active    { background: var(--sc-primary); box-shadow: 0 0 0 2px var(--sc-primary-light); }
+.sc-timeline-dot.pending   { background: var(--sc-gray-300); }
+
+.sc-timeline-content h6 {
+  font-size: var(--sc-fs-base);
+  font-weight: 600;
+  color: var(--sc-gray-800);
+  margin: 0 0 2px;
+}
+
+.sc-timeline-content p {
+  font-size: var(--sc-fs-sm);
+  color: var(--sc-gray-500);
+  margin: 0;
+}
+
+
+/* ---------- Filter Bar ---------- */
+.sc-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--sc-space-lg);
+}
+
+.sc-filter-bar .sc-form-control,
+.sc-filter-bar .sc-form-select {
+  width: auto;
+  min-width: 160px;
+}
+
+.sc-filter-bar .sc-search-input {
+  min-width: 240px;
+}
+
+@media (max-width: 575.98px) {
+  .sc-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sc-filter-bar .sc-form-control,
+  .sc-filter-bar .sc-form-select,
+  .sc-filter-bar .sc-search-input {
+    min-width: 100%;
+  }
+}
+
+
+/* ---------- Pagination ---------- */
+.sc-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sc-space-md) 0;
+  font-size: var(--sc-fs-sm);
+  color: var(--sc-gray-500);
+}
+
+.sc-pagination-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.sc-pagination-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sc-gray-200);
+  border-radius: var(--sc-radius-sm);
+  background: var(--sc-white);
+  color: var(--sc-gray-600);
+  font-size: var(--sc-fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--sc-transition);
+}
+
+.sc-pagination-btn:hover {
+  background: var(--sc-gray-50);
+  border-color: var(--sc-gray-300);
+}
+
+.sc-pagination-btn.active {
+  background: var(--sc-primary);
+  color: var(--sc-white);
+  border-color: var(--sc-primary);
+}
+
+.sc-pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
